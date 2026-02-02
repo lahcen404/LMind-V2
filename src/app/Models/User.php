@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -47,5 +48,15 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => UserRole::class,
         ];
+    }
+
+    // relations
+
+    public function learner(){
+        return $this->hasOne(Learner::class);
+    } 
+
+    public function trainer(){
+        return $this->hasOne(Trainer::class);
     }
 }
