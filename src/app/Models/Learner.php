@@ -13,7 +13,7 @@ class Learner extends Model
 
     // relations 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function training_class(){
