@@ -19,4 +19,9 @@ class Learner extends Model
     public function training_class(){
         return $this->belongsTo(TrainingClass::class);
     }
+
+    public function livrables(){
+        return $this->hasMany(Livrable::class);
+    }
+    
 }
