@@ -4,6 +4,6 @@ Namespace App\Enums;
 
 enum TrainerType: string
 {
-    case Main = 'Main';
-    case Backup = 'Backup';
+    case MAIN = 'Main';
+    case BACKUP = 'Backup';
 }
