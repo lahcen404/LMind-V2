@@ -19,7 +19,7 @@ class Skill extends Model
         return $this->hasMany(Evaluation::class);
     }
 
-    public function skills() {
+    public function briefs() {
         return $this->belongsToMany(Brief::class, 'brief_skill')
             ->withPivot('expected_level')
             ->withTimestamps(); 

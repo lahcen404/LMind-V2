@@ -14,8 +14,17 @@ class Brief extends Model
         return ['type' => BriefType::class]; 
     }
 
+    // relations
     public function skills() {
         return $this->belongsToMany(Skill::class, 'brief_skill')
             ->withPivot('expected_level'); 
+    }
+
+    public function sprint() {
+        return $this->belongsTo(Sprint::class);
+    }
+
+    public function livrables() {
+        return $this->hasMany(Livrable::class);
     }
 }

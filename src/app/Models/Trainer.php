@@ -14,7 +14,7 @@ class Trainer extends Model
     } 
     
     public function training_classes(){
-        return $this->belongsToMany(TrainingClass::class,'trainer_assignments','trainer_id','training_class_id')
+        return $this->belongsToMany(TrainingClass::class,'trainer_class')
                     ->withPivot('trainer_type')
                     ->withTimestamps();
     }

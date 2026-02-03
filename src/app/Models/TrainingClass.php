@@ -20,5 +20,7 @@ class TrainingClass extends Model
         return $this->hasMany(Learner::class);
     }
 
-
+    public function sprints() {
+        return $this->hasMany(Sprint::class);
+    }
 }

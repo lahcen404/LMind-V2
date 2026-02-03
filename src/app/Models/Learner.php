@@ -23,5 +23,9 @@ class Learner extends Model
     public function livrables(){
         return $this->hasMany(Livrable::class);
     }
+
+    public function evaluations() {
+        return $this->hasMany(Evaluation::class);
+    }
     
 }
