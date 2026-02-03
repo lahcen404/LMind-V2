@@ -25,6 +25,7 @@ return new class extends Migration
         $table->id();
         $table->foreignId('trainer_id')->constrained('trainers')->onDelete('cascade');
         $table->foreignId('training_class_id')->constrained('training_classes')->onDelete('cascade');
+        $table->enum('trainer_type', ['Main', 'Backup'])->default('Main');
         $table->timestamps();
     });
     }
