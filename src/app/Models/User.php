@@ -53,10 +53,10 @@ class User extends Authenticatable
     // relations
 
     public function learner(){
-        return $this->hasOne(Learner::class,'user_id');
+        return $this->hasOne(Learner::class);
     } 
 
     public function trainer(){
-        return $this->hasOne(Trainer::class,'user_id');
+        return $this->hasOne(Trainer::class);
     }
 }
