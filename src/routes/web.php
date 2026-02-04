@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [TrainerController::class, 'index'])->name('dashboard');
     });
 
-    Route::middleware(['role:Learner'])->prefix('learner')->name('learner.')->group(function(){
+    Route::middleware(['role:LEARNER'])->prefix('learner')->name('learner.')->group(function(){
         Route::get('/dashboard', [LearnerController::class, 'index'])->name('dashboard');
     });
 
