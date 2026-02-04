@@ -45,13 +45,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-50">
                     {{-- Mock Data for UI --}}
-                    @php
-                        $users = [
-                            ['name' => 'Sarah Connor', 'email' => 's.connor@lmind.com', 'role' => 'TRAINER', 'status' => 'Active', 'color' => 'bg-indigo-500'],
-                            ['name' => 'John Wick', 'email' => 'j.wick@lmind.com', 'role' => 'LEARNER', 'status' => 'Pending', 'color' => 'bg-emerald-500'],
-                            ['name' => 'Ellen Ripley', 'email' => 'e.ripley@lmind.com', 'role' => 'ADMIN', 'status' => 'Active', 'color' => 'bg-rose-500'],
-                        ];
-                    @endphp
+                    
 
                     @foreach($users as $user)
                     <tr class="group hover:bg-rose-50/30 transition-colors">

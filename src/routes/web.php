@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/users',[UserController::class,'index'])->name('users.index');
         Route::get('/users/create',[UserController::class,'create'])->name('users.create');
+        Route::resource('users', UserController::class);
 
     });
 
