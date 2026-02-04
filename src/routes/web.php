@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LearnerController;
+use App\Http\Controllers\TrainerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,6 +17,20 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+
+    Route::middleware(['role:ADMIN'])->prefix('admin')->name('admin.')->group(function(){
+
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    });
+
+    Route::middleware(['role:TRAINER'])->prefix('trainer')->name('trainer.')->group(function(){
+        Route::get('/dashboard', [TrainerController::class, 'index'])->name('dashboard');
+    });
+
+    Route::middleware(['role:Learner'])->prefix('learner')->name('learner.')->group(function(){
+        Route::get('/dashboard', [LearnerController::class, 'index'])->name('dashboard');
+    });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
