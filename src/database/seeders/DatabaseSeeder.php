@@ -30,6 +30,10 @@ class DatabaseSeeder extends Seeder
             'role' => UserRole::ADMIN,
         ]);
 
+
+        User::create(['full_name' => 'Lahcen Learner', 'email' => 'lahcen@gmail.com', 'password' => bcrypt('lahcen123'), 'role' => UserRole::LEARNER]);
+
+
         // create trainers
         $u1 = User::create(['full_name' => 'Lahcen Main', 'email' => 'lahcen.maskour@gmail.com', 'password' => bcrypt('lahcen123'), 'role' => UserRole::TRAINER]);
         $u2 = User::create(['full_name' => 'Lahcen Backup', 'email' => 'lahcen.maskour@lmind.com', 'password' => bcrypt('lahcen123'), 'role' => UserRole::TRAINER]);
@@ -39,7 +43,7 @@ class DatabaseSeeder extends Seeder
 
         // create a Class and link with traineers
         $class = TrainingClass::create(['name' => 'Debuggers', 'promotion' => 'P2026']);
-        
+
         // pivoot trainer class
         $class->trainers()->attach($t1->id, ['trainer_type' => TrainerType::MAIN]);
         $class->trainers()->attach($t2->id, ['trainer_type' => TrainerType::BACKUP]);
