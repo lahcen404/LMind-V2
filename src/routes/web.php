@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LearnerController;
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:ADMIN'])->prefix('admin')->name('admin.')->group(function(){
 
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/users',[UserController::class,'index'])->name('users.index');
+        Route::get('/users/create',[UserController::class,'create'])->name('users.create');
 
     });
 

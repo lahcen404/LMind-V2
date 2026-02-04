@@ -18,7 +18,7 @@
                 <div class="space-y-1">
                     <p class="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] mb-4 ml-4">System Management</p>
 
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm font-semibold hover:text-white hover:translate-x-1 transition-all">
+                    <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-4 py-2 text-sm font-semibold hover:text-white hover:translate-x-1 transition-all">
                         <span class="w-1.5 h-1.5 rounded-full bg-lmind-red-light"></span>
                         Manage Users
                     </a>
@@ -99,7 +99,7 @@
                 <div class="w-1.5 h-1.5 rounded-full {{ Auth::check() ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500' }}"></div>
             </div>
             <p class="text-[10px] text-slate-300 font-mono tracking-tighter">
-            
+
         </div>
     </div>
 </aside>
