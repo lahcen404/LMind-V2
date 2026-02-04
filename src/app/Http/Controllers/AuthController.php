@@ -26,16 +26,15 @@ class AuthController extends Controller
             $role = Auth::user()->role->name;
 
             return match ($role) {
-                'ADMIN'   => redirect()->intended('/admin/dashboard'),
-                'TRAINER' => redirect()->intended('/trainer/dashboard'),
-                'LEARNER' => redirect()->intended('/learner/dashboard'),
+                'ADMIN'   => redirect('/admin/dashboard'),
+                'TRAINER' => redirect('/trainer/dashboard'),
+                'LEARNER' => redirect('/learner/dashboard'),
                 default   => redirect('/login'),
             };
         }
 
-        // Return error if authentication fails
         throw ValidationException::withMessages([
-            'email' => 'Invalid email or password.',
+            'email' => 'Invalid email or password!!',
         ]);
     }
 

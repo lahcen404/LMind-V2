@@ -11,7 +11,7 @@ class TrainerController extends Controller
      */
     public function index()
     {
-        //
+        return view('trainer.dashboard');
     }
 
     /**

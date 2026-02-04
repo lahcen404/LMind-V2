@@ -11,7 +11,7 @@ class LearnerController extends Controller
      */
     public function index()
     {
-        //
+        return view('learner.dashboard');
     }
 
     /**
