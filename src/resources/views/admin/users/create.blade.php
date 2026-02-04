@@ -30,7 +30,7 @@
                 <div>
                     <label class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3 ml-1">Access Role</label>
                     <select name="role" class="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-slate-800 focus:outline-none focus:border-lmind-red-light font-bold appearance-none">
-                        {{-- MATCHING YOUR ENUM BACKING VALUES (UPPERCASE) --}}
+
                         <option value="Learner" {{ old('role') == 'Learner' ? 'selected' : '' }}>Learner</option>
                         <option value="Trainer" {{ old('role') == 'Trainer' ? 'selected' : '' }}>Trainer</option>
                         <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>System Admin</option>
