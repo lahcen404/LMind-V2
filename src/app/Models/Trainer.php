@@ -11,8 +11,8 @@ class Trainer extends Model
     // relations
     public function user(){
         return $this->belongsTo(User::class);
-    } 
-    
+    }
+
     public function training_classes(){
         return $this->belongsToMany(TrainingClass::class,'trainer_class')
                     ->withPivot('trainer_type')
@@ -20,4 +20,4 @@ class Trainer extends Model
     }
 }
 
-  
+

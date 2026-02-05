@@ -71,7 +71,7 @@
                                             </svg></a> <!-- DELETE ACTION -->
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
                                             class="inline"
-                                            onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone.');">
+                                            onsubmit="return confirm('Are you sure you want to delete this user? ');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
