@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\ClasseController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LearnerController;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/create',[UserController::class,'create'])->name('users.create');
         Route::resource('users', UserController::class);
         Route::resource('classes', ClasseController::class);
+        Route::resource('skills', SkillController::class);
 
 
     });
