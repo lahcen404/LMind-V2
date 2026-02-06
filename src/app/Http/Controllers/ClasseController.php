@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\TrainingClass;
@@ -17,7 +17,7 @@ class ClasseController extends Controller
     public function index()
     {
         $classes = TrainingClass::with('trainers.user')->get();
-        
+
         // dd($classes);
         return view('admin.classes.index', compact('classes'));
     }
