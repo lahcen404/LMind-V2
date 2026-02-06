@@ -36,7 +36,7 @@
                         </div>
 
                         @php
-                            // Match badge colors to specific categories
+                            // collors badges
                             $colorClass = match($skill->category->value ?? $skill->category) {
                                 'FRONTEND' => 'bg-emerald-50 text-emerald-600 border-emerald-100',
                                 'BACKEND' => 'bg-blue-50 text-blue-600 border-blue-100',
@@ -57,7 +57,7 @@
                             Modify
                         </a>
 
-                        <form action="{{ route('admin.skills.destroy', $skill->id) }}" method="POST" class="inline" onsubmit="return confirm('Archive this competency from the library?');">
+                        <form action="{{ route('admin.skills.destroy', $skill->id) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this skill?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="w-12 h-full bg-slate-50 text-slate-300 rounded-xl hover:bg-lmind-red-mid hover:text-white transition-all flex items-center justify-center py-3">
