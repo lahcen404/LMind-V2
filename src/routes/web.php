@@ -5,6 +5,7 @@ use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LearnerController;
+use App\Http\Controllers\SprintController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('classes', ClasseController::class);
         Route::resource('skills', SkillController::class);
+        Route::resource('sprints', SprintController::class);
 
 
     });

@@ -26,11 +26,11 @@
                         <span class="w-1.5 h-1.5 rounded-full bg-lmind-red-light"></span>
                         Manage Classes
                     </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm font-semibold hover:text-white hover:translate-x-1 transition-all">
+                    <a href="{{ route('admin.skills.index') }}" class="flex items-center gap-3 px-4 py-2 text-sm font-semibold hover:text-white hover:translate-x-1 transition-all">
                         <span class="w-1.5 h-1.5 rounded-full bg-lmind-red-light"></span>
                         Skill Library
                     </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm font-semibold hover:text-white hover:translate-x-1 transition-all">
+                    <a href="{{ route('admin.sprints.index') }}" class="flex items-center gap-3 px-4 py-2 text-sm font-semibold hover:text-white hover:translate-x-1 transition-all">
                         <span class="w-1.5 h-1.5 rounded-full bg-lmind-red-light"></span>
                         Sprint Timeline
                     </a>
