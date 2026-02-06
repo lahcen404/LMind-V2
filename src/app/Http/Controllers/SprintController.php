@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sprint;
@@ -14,7 +14,7 @@ class SprintController extends Controller
      */
     public function index()
     {
-        // eageer loading 
+        // eageer loading
         $classes = TrainingClass::with(['sprints' => function($query) {
             $query->orderBy('order_sprint', 'asc');
         }])->get();
