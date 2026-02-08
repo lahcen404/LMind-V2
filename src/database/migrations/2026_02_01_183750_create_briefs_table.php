@@ -10,20 +10,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+     public function up(): void
     {
         Schema::create('briefs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->integer('duration');
+            $table->integer('duration'); 
             $table->string('type')->default(BriefType::INDIVIDUAL->value);
-            
-            $table->foreignId('sprint_id')->constrained()->onDelete('cascade');
+            $table->foreignId('training_class_id')->constrained('training_classes')->onDelete('cascade');
+
+            $table->foreignId('trainer_id')->constrained('trainers')->onDelete('cascade');
+
+              $table->foreignId('sprint_id')->nullable()->constrained()->onDelete('set null');
+
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
