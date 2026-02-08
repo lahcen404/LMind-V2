@@ -4,6 +4,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BriefController;
 use App\Http\Controllers\LearnerController;
 use App\Http\Controllers\SprintController;
 use App\Http\Controllers\TrainerController;
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['role:TRAINER'])->prefix('trainer')->name('trainer.')->group(function(){
         Route::get('/dashboard', [TrainerController::class, 'index'])->name('dashboard');
+        Route::resource('briefs', BriefController::class);
     });
 
     Route::middleware(['role:LEARNER'])->prefix('learner')->name('learner.')->group(function(){

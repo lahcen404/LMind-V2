@@ -3,7 +3,7 @@
 Namespace App\Enums;
 
 enum SkillLevel: string{
-    case LEVEL_1 = 'LEVEL_1';
-    case LEVEL_2 = 'LEVEL_2';
-    case LEVEL_3 = 'LEVEL_3';
+    case LEVEL1 = 'LEVEL1';
+    case LEVEL2 = 'LEVEL2';
+    case LEVEL3 = 'LEVEL3';
 }
