@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Models\Learner;
+use App\Models\Trainer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,18 +44,29 @@ class UserController extends Controller
             'role' => 'required'
         ]);
 
-        User::create([
+        $user =User::create([
             'full_name' => $validated['full_name'],
             'email'     => $validated['email'],
             'password'  => Hash::make($validated['password']),
             'role'      => $validated['role'],
         ]);
 
+        if ($validated['role'] === UserRole::LEARNER->value || $validated['role'] === UserRole::LEARNER) {
+            Learner::create([
+                'user_id' => $user->id,
+                'training_class_id' => null 
+            ]);
+        } elseif ($validated['role'] === UserRole::TRAINER->value || $validated['role'] === UserRole::TRAINER) {
+            Trainer::create([
+                'user_id' => $user->id
+            ]);
+        }
+
         return redirect()->route('admin.users.index')->with('success','User Created successfully !!!');
 
     }
 
-   
+
     public function show(string $id)
     {
         //

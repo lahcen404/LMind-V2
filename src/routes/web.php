@@ -5,6 +5,7 @@ use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BriefController;
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\LearnerController;
 use App\Http\Controllers\SprintController;
 use App\Http\Controllers\TrainerController;
@@ -39,6 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:TRAINER'])->prefix('trainer')->name('trainer.')->group(function(){
         Route::get('/dashboard', [TrainerController::class, 'index'])->name('dashboard');
         Route::resource('briefs', BriefController::class);
+
+            Route::get('/classes', [ClassController::class, 'index'])->name('classes.index');
+        Route::get('/classes/{class}/assign', [ClassController::class, 'showAssignForm'])->name('classes.assign');
+Route::post('/classes/{class}/sync', [ClassController::class, 'syncLearners'])->name('classes.sync');
     });
 
     Route::middleware(['role:LEARNER'])->prefix('learner')->name('learner.')->group(function(){
