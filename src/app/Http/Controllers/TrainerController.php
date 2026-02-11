@@ -2,63 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Brief;
+use App\Models\TrainingClass;
+use App\Models\Learner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the Trainer's Dashboard with Context Switching.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('trainer.dashboard');
-    }
+        $trainer = Auth::user()->trainer;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        // get all my classes
+        $allClasses = $trainer->training_classes()->get();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($allClasses->isEmpty()) {
+            return view('trainer.dashboard', [
+                'currentClass' => null,
+                'allClasses' => collect(),
+                'learners' => collect(),
+                'activeBrief' => null,
+                'briefs' => collect(),
+                'sprints' => collect()
+            ]);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // chaange active class and chosen brief
+        $classId = $request->query('class_id', session('trainer_class_context', $allClasses->first()->id));
+        $currentClass = $allClasses->find($classId) ?? $allClasses->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        session(['trainer_class_context' => $currentClass->id]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        // get all briefs for this class
+        $briefs = Brief::where('training_class_id', $currentClass->id)->latest()->get();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // get active brief context (for submissions and timeline)
+        $briefId = $request->query('brief_id', session('trainer_brief_context'));
+        $activeBrief = ($briefId && $briefs->find($briefId))
+            ? $briefs->find($briefId)
+            : $briefs->first();
+
+        session(['trainer_brief_context' => $activeBrief ? $activeBrief->id : null]);
+
+        // fetch learners with their submission status for the active brief
+        $learners = $currentClass->learners()
+            ->with(['user', 'livrables' => function($q) use ($activeBrief) {
+                if($activeBrief) $q->where('brief_id', $activeBrief->id);
+            }])
+            ->get();
+
+        // get sprints
+        $sprints = $currentClass->sprints()->orderBy('order_sprint', 'asc')->get();
+
+        return view('trainer.dashboard', compact(
+            'currentClass',
+            'allClasses',
+            'learners',
+            'activeBrief',
+            'briefs',
+            'sprints'
+        ));
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BriefAssignmentController;
 use App\Http\Controllers\BriefController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\EvaluationLearnerController;
 use App\Http\Controllers\LearnerController;
 use App\Http\Controllers\SprintController;
 use App\Http\Controllers\TrainerController;
@@ -50,19 +52,22 @@ Route::middleware('auth')->group(function () {
         Route::post('/classes/{class}/briefs/attach', [BriefAssignmentController::class, 'attach'])->name('classes.briefs.attach');
         Route::post('/classes/{class}/briefs/{brief}/detach', [BriefAssignmentController::class, 'detach'])->name('classes.briefs.detach');
 
+        Route::get('/evaluations/brief/{brief}/learner/{learner}', [EvaluationController::class, 'create'])->name('evaluations.create');
+        Route::post('/evaluations/brief/{brief}/learner/{learner}', [EvaluationController::class, 'store'])->name('evaluations.store');
+
     });
 
    Route::middleware(['auth', 'role:LEARNER'])->prefix('learner')->name('learner.')->group(function () {
 
-    // Dashboard (The Roadmap)
     Route::get('/dashboard', [LearnerController::class, 'index'])->name('dashboard');
 
-    // Project Views & Submissions
     Route::prefix('briefs')->name('briefs.')->group(function() {
         Route::get('/', [LearnerController::class, 'index'])->name('index');
-        Route::get('/{brief}', [LearnerController::class, 'show'])->name('show'); 
+        Route::get('/{brief}', [LearnerController::class, 'show'])->name('show');
         Route::post('/{brief}/submit', [LearnerController::class, 'submit'])->name('submit');
     });
+
+    Route::get('/evaluations', [EvaluationLearnerController::class, 'index'])->name('evaluations.index');
 });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
