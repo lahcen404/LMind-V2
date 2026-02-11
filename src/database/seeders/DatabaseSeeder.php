@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
    public function run(): void
     {
         // run Skill Seeder first
-       // $this->call(SkillSeeder::class);
+        $this->call(SkillSeeder::class);
 
         User::create([
             'full_name' => 'Lahcen Ait Maskour',
