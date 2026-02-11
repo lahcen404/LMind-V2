@@ -4,6 +4,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BriefAssignmentController;
 use App\Http\Controllers\BriefController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\LearnerController;
@@ -41,14 +42,28 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [TrainerController::class, 'index'])->name('dashboard');
         Route::resource('briefs', BriefController::class);
 
-            Route::get('/classes', [ClassController::class, 'index'])->name('classes.index');
+        Route::get('/classes', [ClassController::class, 'index'])->name('classes.index');
         Route::get('/classes/{class}/assign', [ClassController::class, 'showAssignForm'])->name('classes.assign');
-Route::post('/classes/{class}/sync', [ClassController::class, 'syncLearners'])->name('classes.sync');
+        Route::post('/classes/{class}/sync', [ClassController::class, 'syncLearners'])->name('classes.sync');
+
+        Route::get('/classes/{class}/briefs', [BriefAssignmentController::class, 'showAssignForm'])->name('classes.briefs.assign');
+        Route::post('/classes/{class}/briefs/attach', [BriefAssignmentController::class, 'attach'])->name('classes.briefs.attach');
+        Route::post('/classes/{class}/briefs/{brief}/detach', [BriefAssignmentController::class, 'detach'])->name('classes.briefs.detach');
+
     });
 
-    Route::middleware(['role:LEARNER'])->prefix('learner')->name('learner.')->group(function(){
-        Route::get('/dashboard', [LearnerController::class, 'index'])->name('dashboard');
+   Route::middleware(['auth', 'role:LEARNER'])->prefix('learner')->name('learner.')->group(function () {
+
+    // Dashboard (The Roadmap)
+    Route::get('/dashboard', [LearnerController::class, 'index'])->name('dashboard');
+
+    // Project Views & Submissions
+    Route::prefix('briefs')->name('briefs.')->group(function() {
+        Route::get('/', [LearnerController::class, 'index'])->name('index');
+        Route::get('/{brief}', [LearnerController::class, 'show'])->name('show'); 
+        Route::post('/{brief}/submit', [LearnerController::class, 'submit'])->name('submit');
     });
+});
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

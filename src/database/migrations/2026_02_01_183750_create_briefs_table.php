@@ -16,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->integer('duration'); 
+            $table->integer('duration');
             $table->string('type')->default(BriefType::INDIVIDUAL->value);
-            $table->foreignId('training_class_id')->constrained('training_classes')->onDelete('cascade');
+            $table->foreignId('training_class_id')->nullable()->constrained('training_classes')->onDelete('cascade');
 
             $table->foreignId('trainer_id')->constrained('trainers')->onDelete('cascade');
 

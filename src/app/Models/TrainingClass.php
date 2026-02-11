@@ -33,6 +33,11 @@ class TrainingClass extends Model
         return $this->hasMany(Sprint::class, 'training_class_id');
     }
 
+    public function briefs()
+    {
+        return $this->hasMany(Brief::class, 'training_class_id');
+    }
+
     // get main trainner
     public function getMainTrainerAttribute()
     {
@@ -42,4 +47,6 @@ class TrainingClass extends Model
 
         return $trainer ? $trainer->user : null;
     }
+
+
 }
