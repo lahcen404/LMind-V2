@@ -1,4 +1,4 @@
-
+![Logo](src/public/lmind-logo-removebg-preview.png)
 
 # 📘 LMind – Pedagogical Debriefing System
 
