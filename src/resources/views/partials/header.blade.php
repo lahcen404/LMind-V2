@@ -2,18 +2,31 @@
     <div class="px-6 py-4 flex justify-between items-center max-w-[1920px] mx-auto">
 
         <!-- LOGO AREA: Branding with Generated Asset -->
-        <a href="{{ route(Auth::user()->role->name === 'ADMIN' ? 'admin.dashboard' : (Auth::user()->role->name === 'TRAINER' ? 'trainer.dashboard' : 'learner.dashboard')) }}"
-           class="flex items-center gap-4 group cursor-pointer">
+        @php
+            // Safe URL generation: Fallback to home if not logged in
+            $brandingUrl = Auth::check()
+                ? route(match(Auth::user()->role->name) {
+                    'ADMIN'   => 'admin.dashboard',
+                    'TRAINER' => 'trainer.dashboard',
+                    'LEARNER' => 'learner.dashboard',
+                    default   => 'login'
+                })
+                : url('/');
+        @endphp
+
+        <a href="{{ $brandingUrl }}" class="flex items-center gap-4 group cursor-pointer">
             <div class="relative">
-                <!-- LOGO IMAGE: Using the asset from your generated prompt -->
+                <!-- LOGO IMAGE: Fixed path using asset helper -->
                 <div class="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-rose-900/20 group-hover:rotate-6 transition-transform duration-300 border-2 border-slate-800 bg-white/5 p-1">
                     <img src="{{ asset('lmind-logo-removebg-preview.png') }}"
                          alt="LMind Logo"
                          class="w-full h-full object-contain"
                          onerror="this.src='https://ui-avatars.com/api/?name=L&color=FFFFFF&background=be123c&bold=true'">
                 </div>
-                <!-- Status indicator -->
+                <!-- Status indicator (Only show if authenticated) -->
+                @auth
                 <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-lmind-navy rounded-full shadow-sm"></div>
+                @endauth
             </div>
 
             <div class="flex flex-col">
@@ -40,7 +53,7 @@
                         @php
                             $roleColor = match(Auth::user()->role->name) {
                                 'ADMIN' => 'text-amber-400 bg-amber-400/10 border-amber-400/20',
-                                'TRAINER' => 'text-lmind-red-light bg-rose-500/10 border-rose-500/20',
+                                'TRAINER' => 'text-lmind-red-light bg-rose-50/10 border-rose-50/20',
                                 'LEARNER' => 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
                                 default => 'text-slate-400 bg-slate-500/10 border-slate-500/20'
                             };
