@@ -37,6 +37,20 @@ The system improves evaluation traceability and simplifies pedagogical follow-up
 * Eloquent ORM
 * Blade Template Engine
 * MVC Architecture
+* **Docker**
+* **Docker Compose**
+* **Nginx**
+
+---
+
+## 🐳 Docker Setup
+
+The project runs in a containerized environment with:
+
+* **PHP-FPM**
+* **Nginx**
+* **PostgreSQL**
+* Docker Compose orchestration
 
 ---
 
