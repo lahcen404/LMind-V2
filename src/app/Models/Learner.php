@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Learner extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'training_class_id'
+    ];
+
+    // relations 
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function training_class(){
+        return $this->belongsTo(TrainingClass::class);
+    }
+
+    public function livrables(){
+        return $this->hasMany(Livrable::class);
+    }
+
+    public function evaluations() {
+        return $this->hasMany(Evaluation::class);
+    }
+    
+}
